@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './MenuManagement.css'
 import axios from 'axios'
-import { BACKEND_URL } from '../../../config/constants.js'
+// import { BACKEND_URL } from '../../../config/constants.js' // This import is no longer needed for image URLs
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import EditPopup from '../../components/EditPopup/EditPopup.jsx'
@@ -26,6 +26,7 @@ const MenuManagement = () => {
             case 11: return 'Main Dishes';
             case 12: return 'Drinks';
             case 13: return 'Desserts';
+            default: return 'Unknown'; // Added default case
         }
     }
 
@@ -86,7 +87,8 @@ const MenuManagement = () => {
 
         const formData = new FormData();
         formData.append("image", editingImage.file);
-        formData.append("old_image_filename", item.image);
+        // old_image_filename is no longer strictly necessary, as backend fetches old URL from DB
+        // formData.append("old_image_filename", item.image); // Remove this line
         formData.append("product_id", item.product_id);
 
         try {
@@ -134,7 +136,8 @@ const MenuManagement = () => {
                             <div>
                                 <img
                                     className='image-preview'
-                                    src={isEditingThisItem && editingImage.file ? URL.createObjectURL(editingImage.file) : `${BACKEND_URL}/images/` + item.image}
+                                    // Directly use the 'image' prop as it's now the full GCS URL
+                                    src={isEditingThisItem && editingImage.file ? URL.createObjectURL(editingImage.file) : item.image}
                                     alt="Product"
                                 />
                                 <div className={`image-change ${isEditingThisItem ? 'editing' : ''}`}>
