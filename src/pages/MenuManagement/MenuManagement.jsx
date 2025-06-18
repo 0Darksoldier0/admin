@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './MenuManagement.css'
 import axios from 'axios'
-// import { BACKEND_URL } from '../../../config/constants.js' // This import is no longer needed for image URLs
+import { BACKEND_URL } from '../../../config/constants.js' // This import is no longer needed for image URLs
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import EditPopup from '../../components/EditPopup/EditPopup.jsx'
