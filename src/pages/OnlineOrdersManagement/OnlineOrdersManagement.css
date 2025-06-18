@@ -1,0 +1,124 @@
+.orders {
+    padding: 120px 50px;
+    background-color: white;
+    animation: fadeIn 1s;
+    min-height: 100vh;
+}
+.orders h1 {
+    font-size: 50px;
+    font-weight: 600;
+    color: brown;
+    text-align: center;
+}
+.orders h2 {
+    font-weight: 600;
+    color: rgb(80, 80, 80);
+    font-size: 30px;
+    margin-top: 40px;
+}
+
+.top-section2 button {
+    width: 130px;
+    height: 45px;
+    margin-right: 50px;
+    font-weight: 600;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 25px;
+    background-color: brown;
+    color: white;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.top-section2 button:hover {
+    opacity: 0.8;
+}
+
+.list-table-format2 {
+    display: grid;
+    grid-template-columns:  100px 1fr 1fr 1fr ;
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    padding: 20px 0px;  
+    border-bottom: 1px solid rgb(201, 201, 201);
+    transition: all 0.2s;
+}
+
+.list-table2 .title2 {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr; 
+    font-weight: 600;
+    color: rgb(80, 80, 80);
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    font-size: 22px;
+    text-align: center;
+    padding-bottom: 15px;
+    padding-top: 10px;
+}
+.list-table-format2:hover{
+    background-color: rgb(245, 245, 245); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transform: scale(1.01); 
+}
+
+.list-table-format2 img {
+    width: 40px;
+    object-fit: cover;
+}
+
+.list-table-format2 p {
+    font-size: 20px;
+}
+.list-table-format2 .order-id {
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: all 0.15s;
+}
+.list-table-format2 .order-id:hover {
+    border-bottom: 1px solid brown;
+    color: brown;
+}
+
+.order-status {
+    font-size: 18px;
+    color: rgb(80, 80, 80);
+    padding: 5px 5px;
+    border-radius: 25px;
+    outline: 1px;
+    cursor: pointer;
+}
+.order-status:focus {
+    border: 1px solid brown;
+}
+
+.date-range-selector {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px 0;
+}
+
+.date-range-selector label {
+    font-size: 18px;
+    color: rgb(80, 80, 80);
+    font-weight: 500;
+}
+
+.date-range-selector input[type="date"] {
+    padding: 8px 12px;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 5px;
+    font-size: 16px;
+    color: rgb(90, 90, 90);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.date-range-selector input[type="date"]:focus {
+    border-color: brown;
+}

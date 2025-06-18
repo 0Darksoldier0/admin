@@ -1,0 +1,183 @@
+.add-product-container {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    background-color: white;
+    align-items: center;
+    margin: 140px auto;
+    padding-top: 40px;
+    box-shadow: 0px 0px 10px rgb(219, 219, 219);
+    border-radius: 10px;
+    animation: fadeIn 1s;
+}
+.add-product-container h1 {
+    color: brown;
+    font-size: 40px;
+}
+.add-product {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    width: 100%;
+    justify-content: center;
+    margin: 30px auto;
+}
+.left-section label {
+    cursor: pointer;
+}
+.left-section img {
+    width: 200px;
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    gap: 10px;
+}
+
+.right-section p {
+    font-size: 18px;
+}
+
+.right-section input{
+    padding: 10px 15px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid rgb(220, 220, 220);
+    outline: none;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+.right-section input:focus {
+    border: 2px solid brown;
+}
+
+.right-section textarea {
+    font-size: 15px;
+    border: 2px solid rgb(220, 220, 220);
+    outline: none;
+    padding: 10px 15px;
+    height: 80px;
+    border-radius: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.right-section textarea:focus {
+    border: 2px solid brown;
+}
+
+.add-category-price {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-items: center;
+}
+.right-section .add-category select {
+    width: 150px;
+    padding: 10px 15px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid rgb(220, 220, 220);
+    outline: none;
+    font-size: 15px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+.right-section .add-category select:focus {
+    border: 2px solid brown;
+}
+.right-section .add-availability {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.right-section .add-availability label{
+    margin-right: 20px;
+}
+.right-section .add-availability input {
+    width: 15px;
+}
+
+.right-section .button{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.right-section button {
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.right-section .cancel-button:hover {
+    background-color: rgb(219, 219, 219);
+}
+.right-section .add-button {
+    background-color: brown;
+    color: white;
+    transition: opacity 0.2s;
+}
+.right-section .add-button:hover {
+    opacity: 0.8;
+}
+.right-section .add-button:active {
+    opacity: 0.6;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 26px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(219, 219, 219);
+  border-radius: 30px;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(38px);
+}

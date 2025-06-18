@@ -1,0 +1,82 @@
+.staff-list {
+    padding: 120px 50px;
+    background-color: white;
+    animation: fadeIn 1s;
+    min-height: 100vh;
+}
+
+.top-section1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.top-section1 h1 {
+    font-size: 50px;
+    font-weight: 600;
+    color: brown;
+}
+.top-section1 button {
+    width: 130px;
+    height: 45px;
+    margin-right: 50px;
+    font-weight: 600;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 25px;
+    background-color: brown;
+    color: white;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.top-section1 button:hover {
+    opacity: 0.8;
+}
+
+.list-table-format1 {
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr 1fr 1fr ;
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    padding: 20px 0px;  
+    border-bottom: 1px solid rgb(201, 201, 201);
+    transition: all 0.2s;
+}
+.list-table1 .title1 {
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr 1fr 1fr ;
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    padding: 20px 0px;  
+    border-bottom: 2px solid rgb(201, 201, 201);
+    font-size: 22px;
+    color: rgb(80, 80, 80);
+}
+.list-table-format1:hover{
+    background-color: rgb(245, 245, 245); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transform: scale(1.01); 
+}
+
+.list-table-format1 p {
+    font-size: 20px;
+}
+
+.actions1 {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+
+}
+.actions1 p{
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: all 0.15s;
+}
+.actions1 p:hover {
+    color: brown;
+    border-bottom: 1px solid brown;
+}

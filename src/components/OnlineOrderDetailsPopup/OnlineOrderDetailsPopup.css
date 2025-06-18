@@ -1,0 +1,153 @@
+.order-details-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s;
+}
+
+
+.order-details-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px; 
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    width: 90%; 
+    max-width: 800px; 
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    gap: 25px; 
+    color: #333; 
+}
+
+.order-details-content h1 {
+    text-align: center;
+    color: brown;
+    margin-bottom: 20px;
+    font-size: 2.2em; 
+    font-weight: 700;
+}
+
+.order-details-sections {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 767px) {
+    .order-details-sections {
+        flex-direction: column; 
+    }
+}
+
+.customer-details-section,
+.order-summary-section {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.customer-details-section h2,
+.order-summary-section h2 {
+    font-size: 1.5em;
+    color: #555;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.customer-details-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px 25px;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.field-group label {
+    font-weight: 600;
+    color: #666;
+    font-size: 0.95em;
+}
+
+.field-group p {
+    color: #333;
+    font-size: 1.05em;
+}
+
+.order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item p:last-child {
+    font-weight: 600;
+    color: rgb(70, 70, 70);
+}
+
+.subtotal {
+    border-top: 2px solid #ddd;
+    padding-top: 20px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subtotal label {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: rgb(70, 70, 70);
+}
+
+.subtotal p {
+    font-size: 25px;
+    font-weight: 700;
+    color: brown;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 40px;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.15s;
+    line-height: 1;
+}
+
+.close-button:hover {
+    color: black;
+}

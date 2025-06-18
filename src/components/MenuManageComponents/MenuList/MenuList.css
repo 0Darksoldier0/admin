@@ -1,0 +1,133 @@
+.menu-list {
+    padding: 120px 50px;
+    background-color: white;
+    animation: fadeIn 1s;
+}
+
+.top-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.top-section h1 {
+    font-size: 50px;
+    font-weight: 600;
+    color: brown;
+}
+.top-section button {
+    width: 130px;
+    height: 45px;
+    margin-right: 50px;
+    font-weight: 600;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 25px;
+    background-color: brown;
+    color: white;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.top-section button:hover {
+    opacity: 0.8;
+}
+.top-section input {
+    height: 45px;
+    width: 200px;
+    padding: 0px 15px;
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 25px;
+    outline: none;
+}
+.top-section input:focus{
+    border: 1px solid brown;
+}
+
+.list-table-format {
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    padding: 20px 0px;  
+    border-bottom: 1px solid rgb(201, 201, 201);
+    transition: all 0.2s;
+}
+.list-table .title {
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    padding: 20px 0px;  
+    border-bottom: 2px solid rgb(201, 201, 201);
+}
+.list-table-format:hover{
+    background-color: rgb(245, 245, 245); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transform: scale(1.01); 
+}
+
+.list-table-format img {
+    width: 170px;
+    height: 140px;
+    object-fit: cover;
+}
+
+.list-table-format.title {
+    font-size: 18px;
+}
+
+.actions {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+
+}
+.actions p{
+    cursor: pointer;
+}
+
+/* Hide image-change by default */
+.image-change {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  visibility: hidden; /* Use visibility for smooth transition */
+  opacity: 0; /* Use opacity for smooth transition */
+  transition: visibility 0s, opacity 0.15s linear; /* Add transition for smooth fade */
+}
+
+/* Show image-change on hover of list-table-format, but only if not currently editing */
+.list-table-format:hover .image-change:not(.editing) {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Ensure image-change is always visible when editing */
+.image-change.editing {
+  visibility: visible;
+  opacity: 1;
+}
+
+.image-change label,span {
+  border: 1px solid rgb(200, 200, 200);
+  background-color: rgb(221, 221, 221);
+  padding: 1px 5px;
+  width: 65px;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.image-change label:hover {
+  opacity: 0.8;
+}
+.image-change span:hover {
+  opacity: 0.8;
+}
+.image-change .save {
+  background-color: brown;
+  color: white;
+}
