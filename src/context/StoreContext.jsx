@@ -19,11 +19,14 @@ const StoreContextProvider = (props) => {
     const [onlineOrdersData, setOnlineOrdersData] = useState([]);
     const [inHouseOrdersData, setInHouseOrderData] = useState([]);
     const [staffList, setStaffList] = useState([]);
-    
+
     // Data visulization
     const [priceData, setPriceData] = useState([]);
+    const [productPurchaseQuantityData, setProductPurchaseQuantityData] = useState([]);
+    const [productHistoryData, setProductHistoryData] = useState([]);
+    const [todayRevenueData, setTodayRevenueData] = useState();
+    const [totalRevenueData, setTotalRevenueData] = useState();
 
-    
     const fetchFoodList = async (token) => {
         try {
             const response = await axios.post(`${BACKEND_URL}/api/product/listall`, {}, { headers: { token } });
@@ -38,7 +41,7 @@ const StoreContextProvider = (props) => {
             }
             else {
                 console.error("(FetchFoodList) Server error")
-            } 
+            }
         }
     }
 
@@ -63,7 +66,7 @@ const StoreContextProvider = (props) => {
     const fetchInhouseOrders = async (token) => {
         try {
             const response = await axios.post(`${BACKEND_URL}/api/inhouseorder/list`, {}, { headers: { token } });
-            
+
             if (response.status === 200) {
                 setInHouseOrderData(response.data.orders);
                 // console.log(response.data.orders)
@@ -76,7 +79,7 @@ const StoreContextProvider = (props) => {
 
     const fetchUsers = async (token) => {
         try {
-            const response = await axios.post(`${BACKEND_URL}/api/user/list`, {}, {headers: { token }});
+            const response = await axios.post(`${BACKEND_URL}/api/user/list`, {}, { headers: { token } });
             if (response.status === 200) {
                 setStaffList(response.data.users);
                 // console.log(response.data.users);
@@ -94,7 +97,7 @@ const StoreContextProvider = (props) => {
 
     const fetchProductPrice = async (token) => {
         try {
-            const response = await axios.post(`${BACKEND_URL}/api/product/getprice`, {}, {headers: {token}})
+            const response = await axios.post(`${BACKEND_URL}/api/analytics/getprice`, {}, { headers: { token } })
             if (response.status === 200) {
                 setPriceData(response.data.data);
                 // console.log(response.data.data);
@@ -110,15 +113,111 @@ const StoreContextProvider = (props) => {
         }
     }
 
+    const fetchProductPurchaseQuantity = async (token) => {
+        try {
+            const response = await axios.post(`${BACKEND_URL}/api/analytics/getproductpurchasequantity`, {}, { headers: { token } })
+            if (response.status === 200) {
+                setProductPurchaseQuantityData(response.data.data);
+                console.log("ProductPurchaseQuantity: ", response.data.data);
+            }
+        }
+        catch (error) {
+            if (error.response) {
+                console.error("(FetchProductPurchaseQuantity) ", error.response.data.message)
+            }
+            else {
+                console.error("(FetchProductPurchaseQuantity) Server error")
+            }
+        }
+    }
+
+    const fetchProductFromPriceHistory = async (token) => {
+        try {
+            const response = await axios.post(`${BACKEND_URL}/api/analytics/getProductFromPriceHistory`, {}, { headers: { token } })
+            if (response.status === 200) {
+                setProductHistoryData(response.data.data);
+                console.log("ProductFromPriceHistory: ", response.data.data);
+            }
+        }
+        catch (error) {
+            if (error.response) {
+                console.error("(FetchProductFromPriceHistory) ", error.response.data.message)
+            }
+            else {
+                console.error("(FetchProductFromPriceHistory) Server error")
+            }
+        }
+    }
+
+    const fetchTodayRevenue = async (token) => {
+        try {
+            const response = await axios.post(`${BACKEND_URL}/api/analytics/getTodayRevenue`, {}, { headers: { token } })
+            if (response.status === 200) {
+                setTodayRevenueData(response.data.data);
+                console.log("TodayRevenue: ", response.data.data);
+            }
+        }
+        catch (error) {
+            if (error.response) {
+                console.error("(FetchTodayRevenue) ", error.response.data.message)
+            }
+            else {
+                console.error("(FetchTodayRevenue) Server error")
+            }
+        }
+    }
+
+    const fetchTotalRevenue = async (token) => {
+        try {
+            const response = await axios.post(`${BACKEND_URL}/api/analytics/getTotalRevenue`, {}, { headers: { token } })
+            if (response.status === 200) {
+                setTotalRevenueData(response.data.data);
+                console.log("TodayRevenue: ", response.data.data);
+            }
+        }
+        catch (error) {
+            if (error.response) {
+                console.error("(FetchTotalRevenue) ", error.response.data.message)
+            }
+            else {
+                console.error("(FetchTotalRevenue) Server error")
+            }
+        }
+    }
+
+    // const [productPriceHistoryData, setProductPriceHistoryData] = useState([]);
+    // const fetProductPriceHistory = async (token, product_id) => {
+    //     try {
+    //         const response = await axios.post(`${BACKEND_URL}/api/analytics/getProductPriceHistory`, { product_id: product_id }, { headers: { token } })
+    //         if (response.status === 200) {
+    //             setProductPriceHistoryData(response.data.data);
+    //             console.log(response.data.data);
+    //         }
+    //     }
+    //     catch (error) {
+    //         if (error.response) {
+    //             console.error("(FetchProductFromPriceHistory) ", error.response.data.message)
+    //         }
+    //         else {
+    //             console.error("(FetchProductFromPriceHistory) Server error")
+    //         }
+    //     }
+    // }
+
     useEffect(() => {
         async function loadData() {
             if (localStorage.getItem("token")) {
                 setToken(localStorage.getItem("token"));
                 await fetchFoodList(localStorage.getItem("token"));
                 await fetchOnlineOrders(localStorage.getItem("token"))
-                await fetchProductPrice(localStorage.getItem("token"))
                 await fetchUsers(localStorage.getItem("token"));
                 await fetchInhouseOrders(localStorage.getItem("token"));
+
+                await fetchProductPrice(localStorage.getItem("token"))
+                await fetchProductPurchaseQuantity(localStorage.getItem("token"))
+                await fetchProductFromPriceHistory(localStorage.getItem("token"))
+                await fetchTodayRevenue(localStorage.getItem("token"))
+                await fetchTotalRevenue(localStorage.getItem("token"))
             }
         }
         loadData();
@@ -182,6 +281,16 @@ const StoreContextProvider = (props) => {
 
         priceData,
         fetchProductPrice,
+
+        productPurchaseQuantityData,
+        fetchProductPurchaseQuantity,
+
+        productHistoryData,
+        fetchProductFromPriceHistory,
+        todayRevenueData,
+        fetchTodayRevenue,
+        totalRevenueData,
+        fetchTotalRevenue,
 
         staffList,
         fetchUsers

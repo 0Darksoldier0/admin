@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import './SignIn.css'
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../../../config/constants'
 import { StoreContext } from '../../context/StoreContext'
 import axios from 'axios'
@@ -9,7 +9,8 @@ import { useEffect } from 'react';
 
 const SignIn = () => {
 
-    const { token, setToken, fetchFoodList, fetchOnlineOrders, fetchProductPrice, fetchUsers, fetchInhouseOrders} = useContext(StoreContext);
+    const { token, setToken, fetchFoodList, fetchOnlineOrders, fetchProductFromPriceHistory, fetchTodayRevenue, fetchTotalRevenue,
+        fetchUsers, fetchInhouseOrders, fetchProductPrice, fetchProductPurchaseQuantity } = useContext(StoreContext);
 
     const navigate = useNavigate();
 
@@ -46,9 +47,14 @@ const SignIn = () => {
                 });
                 await fetchFoodList(response.data.token);
                 await fetchOnlineOrders(response.data.token);
-                await fetchProductPrice(response.data.token);
                 await fetchUsers(response.data.token);
                 await fetchInhouseOrders(response.data.token)
+
+                await fetchProductPrice(response.data.token);
+                await fetchProductPurchaseQuantity(response.data.token)
+                await fetchProductFromPriceHistory(response.data.token)
+                await fetchTodayRevenue(response.data.token)
+                await fetchTotalRevenue(response.data.token)
 
                 navigate('/');
             }
