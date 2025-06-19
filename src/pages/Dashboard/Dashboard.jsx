@@ -243,9 +243,9 @@ const Dashboard = () => {
     };
 
     // --- Code for productPriceHistoryData (Line Chart) ---
-    const sortedProductPriceHistoryData = [...productPriceHistoryData].sort((a, b) => new Date(a._date) - new Date(b._date));
+    const sortedProductPriceHistoryData = [...productPriceHistoryData].sort((a, b) => new Date(a._date.replace('T', ' ').replace('.000Z', '')) - new Date(b._date.replace('T', ' ').replace('.000Z', '')));
 
-    const labelsPriceHistory = sortedProductPriceHistoryData.map(item => item._date);
+    const labelsPriceHistory = sortedProductPriceHistoryData.map(item => item._date.replace('T', ' ').replace('.000Z', ''));
     const dataValuesPriceHistory = sortedProductPriceHistoryData.map(item => item.product_price);
 
     const chartDataPriceHistory = {
