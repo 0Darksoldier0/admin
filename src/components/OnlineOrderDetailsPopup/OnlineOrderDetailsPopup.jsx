@@ -40,7 +40,7 @@ const OnlineOrderDetailsPopup = ({ order, token, onClose }) => {
                             </div>
                             <div className="field-group">
                                 <label>Phone Number:</label>
-                                <p>{order.shipping_details.phoneNumber}</p>
+                                <p>{order.shipping_details.phone_number}</p>
                             </div>
                             <div className="field-group">
                                 <label>Email:</label>

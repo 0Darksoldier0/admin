@@ -45,6 +45,10 @@
   transition: all 0.2s;
 }
 
+.list-table-format p:nth-child(3) {
+  justify-self: start;
+}
+
 .list-table .title {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;

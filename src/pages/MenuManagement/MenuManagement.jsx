@@ -120,7 +120,7 @@ const MenuManagement = () => {
             </div>
             <div className='list-table'>
                 <div className="title">
-                    <b>Product Image</b>
+                    <b></b>
                     <b>Product Code</b>
                     <b>Product Name</b>
                     <b>Category</b>
