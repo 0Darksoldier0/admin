@@ -23,10 +23,9 @@ const OnlineOrdersManagement = () => {
         const currentStatus = event.target.value;
         try {
             const response = await axios.post(`${BACKEND_URL}/api/order/updateStatus`, { status: currentStatus, order_id: order_id }, { headers: { token } });
+            
             if (response.status === 200) {
-                if (currentStatus === "delivered") {
-                    await fetchOnlineOrders(token);
-                }
+                await fetchOnlineOrders(token);
                 toast.success(response.data.message);
             }
         }
