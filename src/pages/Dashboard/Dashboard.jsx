@@ -6,6 +6,7 @@ import { useContext } from 'react'
 import { StoreContext } from '../../context/StoreContext'
 import { BACKEND_URL } from '../../../config/constants';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 ChartJS.register(
     CategoryScale,
@@ -21,10 +22,12 @@ ChartJS.register(
 const Dashboard = () => {
 
     const { priceData, productPurchaseQuantityData, productHistoryData,
-        todayRevenueData, totalRevenueData, token } = useContext(StoreContext);
+        todayRevenueData, totalRevenueData, token, isAdmin } = useContext(StoreContext);
 
-     const [productPriceHistoryData, setProductPriceHistoryData] = useState([]);
+    const [productPriceHistoryData, setProductPriceHistoryData] = useState([]);
     const [selectedProductId, setSelectedProductId] = useState('');
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (selectedProductId && token) {
@@ -40,7 +43,7 @@ const Dashboard = () => {
             const response = await axios.post(`${BACKEND_URL}/api/analytics/getProductPriceHistory`, { product_id: product_id }, { headers: { token } })
             if (response.status === 200) {
                 setProductPriceHistoryData(response.data.data);
-                console.log("Fetched Price History: ", response.data.data);
+                // console.log("Fetched Price History: ", response.data.data);
             }
         }
         catch (error) {
@@ -335,6 +338,12 @@ const Dashboard = () => {
             }
         }
     };
+
+    useEffect(() => {
+        if (!isAdmin) {
+            navigate('/onlineOrdersManagement')
+        }
+    }, [isAdmin])
 
     return (
         <div className='dashboard-container'>

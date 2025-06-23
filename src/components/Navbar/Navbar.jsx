@@ -8,12 +8,12 @@ const Navbar = () => {
 
     const navigate = useNavigate();
 
-    const { token, setToken, menu } = useContext(StoreContext);
+    const { isAdmin, token, setToken, menu } = useContext(StoreContext);
 
     const onSignOutClickHandler = () => {
-        setToken("");   
+        setToken("");
         localStorage.removeItem("token");
-        navigate('/signIn'); 
+        navigate('/signIn');
         window.location.reload();
     }
 
@@ -24,7 +24,7 @@ const Navbar = () => {
                 <p>A Hundred Tastes</p>
             </div></Link>
             {
-                token
+                token && isAdmin
                     ? <>
                         <ul className='navbar-menu'>
 
@@ -36,11 +36,21 @@ const Navbar = () => {
                         </ul>
                         <div className="navbar-right">
                             <button onClick={onSignOutClickHandler}>Sign Out</button>
-                        </div></>
-                    : <></>
+                        </div>
+                    </>
+                    : <>
+                        <ul className='navbar-menu'>
+
+                            <Link to='/onlineOrdersManagement' className={menu === "Manage Online Orders" ? "active" : "inactive"}>Online Orders</Link>
+                            <Link to='/ordersManagement' className={menu === "Manage Orders" ? "active" : "inactive"}>In-house Orders</Link>
+                        </ul>
+                        <div className="navbar-right">
+                            <button onClick={onSignOutClickHandler}>Sign Out</button>
+                        </div>
+                    </>
             }
 
-        </div>
+        </div >
     )
 }
 

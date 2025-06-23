@@ -6,11 +6,12 @@ import { StoreContext } from '../../context/StoreContext'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 const SignIn = () => {
 
     const { token, setToken, fetchFoodList, fetchOnlineOrders, fetchProductFromPriceHistory, fetchTodayRevenue, fetchTotalRevenue,
-        fetchUsers, fetchInhouseOrders, fetchProductPrice, fetchProductPurchaseQuantity } = useContext(StoreContext);
+        fetchUsers, fetchInhouseOrders, fetchProductPrice, fetchProductPurchaseQuantity, setIsAdmin } = useContext(StoreContext);
 
     const navigate = useNavigate();
 
@@ -40,21 +41,30 @@ const SignIn = () => {
             if (response.status === 200) {
                 setToken(response.data.token);
                 localStorage.setItem("token", response.data.token);
-                // localStorage.setItem("username", response.data.username);
+
+                const decoded = jwtDecode(response.data.token);
+
+                setIsAdmin(decoded.type === 0 ? true : false);
+
                 setData({
                     username: "",
                     password: ""
                 });
-                await fetchFoodList(response.data.token);
-                await fetchOnlineOrders(response.data.token);
-                await fetchUsers(response.data.token);
-                await fetchInhouseOrders(response.data.token)
 
-                await fetchProductPrice(response.data.token);
-                await fetchProductPurchaseQuantity(response.data.token)
-                await fetchProductFromPriceHistory(response.data.token)
-                await fetchTodayRevenue(response.data.token)
-                await fetchTotalRevenue(response.data.token)
+                await fetchOnlineOrders(response.data.token);
+                await fetchInhouseOrders(response.data.token);
+
+                if (decoded.type === 0) {
+                    await fetchFoodList(response.data.token);
+                    await fetchUsers(response.data.token);
+
+                    await fetchProductPrice(response.data.token);
+                    await fetchProductPurchaseQuantity(response.data.token);
+                    await fetchProductFromPriceHistory(response.data.token);
+                    await fetchTodayRevenue(response.data.token);
+                    await fetchTotalRevenue(response.data.token);
+                }
+
 
                 navigate('/');
             }

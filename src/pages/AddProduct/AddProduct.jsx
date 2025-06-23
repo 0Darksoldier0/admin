@@ -11,7 +11,7 @@ const AddProduct = () => {
 
     const navigate = useNavigate();
 
-    const {token, fetchFoodList, fetchProductPrice} = useContext(StoreContext);
+    const { isAdmin, token, fetchFoodList, fetchProductPrice} = useContext(StoreContext);
 
     const [image, setImage] = useState(false);
     const [isAvailable, setIsAvailable] = useState(true);
@@ -40,12 +40,6 @@ const AddProduct = () => {
             setData(data => ({ ...data, [name]: value }));
         }
     }
-
-
-    // for debug
-    // useEffect(() => {
-    //     console.log(data)
-    // }, [data])
 
     const onAddClickHandler = async (event) => {
         event.preventDefault();
@@ -91,6 +85,11 @@ const AddProduct = () => {
         }
     }
 
+    useEffect(() => {
+        if (!isAdmin) {
+            navigate('/onlineOrdersManagement')
+        }
+    }, [isAdmin])
 
     return (
         <div className='add-product-container'>

@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { BACKEND_URL } from "../../config/constants";
 import { useLocation } from "react-router-dom";
+import { jwtDecode } from 'jwt-decode';
 
 export const StoreContext = createContext(null);
 
@@ -13,6 +14,8 @@ const StoreContextProvider = (props) => {
         const savedMenu = localStorage.getItem("currentMenu");
         return savedMenu ? savedMenu : "Dashboard";
     });
+
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const [token, setToken] = useState("");
     const [foodList, setFoodList] = useState([]);
@@ -118,7 +121,7 @@ const StoreContextProvider = (props) => {
             const response = await axios.post(`${BACKEND_URL}/api/analytics/getproductpurchasequantity`, {}, { headers: { token } })
             if (response.status === 200) {
                 setProductPurchaseQuantityData(response.data.data);
-                console.log("ProductPurchaseQuantity: ", response.data.data);
+                // console.log("ProductPurchaseQuantity: ", response.data.data);
             }
         }
         catch (error) {
@@ -136,7 +139,7 @@ const StoreContextProvider = (props) => {
             const response = await axios.post(`${BACKEND_URL}/api/analytics/getProductFromPriceHistory`, {}, { headers: { token } })
             if (response.status === 200) {
                 setProductHistoryData(response.data.data);
-                console.log("ProductFromPriceHistory: ", response.data.data);
+                // console.log("ProductFromPriceHistory: ", response.data.data);
             }
         }
         catch (error) {
@@ -154,7 +157,7 @@ const StoreContextProvider = (props) => {
             const response = await axios.post(`${BACKEND_URL}/api/analytics/getTodayRevenue`, {}, { headers: { token } })
             if (response.status === 200) {
                 setTodayRevenueData(response.data.data);
-                console.log("TodayRevenue: ", response.data.data);
+                // console.log("TodayRevenue: ", response.data.data);
             }
         }
         catch (error) {
@@ -172,7 +175,7 @@ const StoreContextProvider = (props) => {
             const response = await axios.post(`${BACKEND_URL}/api/analytics/getTotalRevenue`, {}, { headers: { token } })
             if (response.status === 200) {
                 setTotalRevenueData(response.data.data);
-                console.log("TodayRevenue: ", response.data.data);
+                // console.log("TotalRevenue: ", response.data.data);
             }
         }
         catch (error) {
@@ -185,39 +188,29 @@ const StoreContextProvider = (props) => {
         }
     }
 
-    // const [productPriceHistoryData, setProductPriceHistoryData] = useState([]);
-    // const fetProductPriceHistory = async (token, product_id) => {
-    //     try {
-    //         const response = await axios.post(`${BACKEND_URL}/api/analytics/getProductPriceHistory`, { product_id: product_id }, { headers: { token } })
-    //         if (response.status === 200) {
-    //             setProductPriceHistoryData(response.data.data);
-    //             console.log(response.data.data);
-    //         }
-    //     }
-    //     catch (error) {
-    //         if (error.response) {
-    //             console.error("(FetchProductFromPriceHistory) ", error.response.data.message)
-    //         }
-    //         else {
-    //             console.error("(FetchProductFromPriceHistory) Server error")
-    //         }
-    //     }
-    // }
 
     useEffect(() => {
         async function loadData() {
             if (localStorage.getItem("token")) {
                 setToken(localStorage.getItem("token"));
-                await fetchFoodList(localStorage.getItem("token"));
-                await fetchOnlineOrders(localStorage.getItem("token"))
-                await fetchUsers(localStorage.getItem("token"));
-                await fetchInhouseOrders(localStorage.getItem("token"));
 
-                await fetchProductPrice(localStorage.getItem("token"))
-                await fetchProductPurchaseQuantity(localStorage.getItem("token"))
-                await fetchProductFromPriceHistory(localStorage.getItem("token"))
-                await fetchTodayRevenue(localStorage.getItem("token"))
-                await fetchTotalRevenue(localStorage.getItem("token"))
+                const decoded = jwtDecode(localStorage.getItem("token"));
+                // console.log("jwt decoded: ", decoded);
+                setIsAdmin(decoded.type === 0 ? true : false);
+
+                await fetchOnlineOrders(localStorage.getItem("token"))
+                await fetchInhouseOrders(localStorage.getItem("token"));
+                
+                if (decoded.type === 0) {
+                    await fetchUsers(localStorage.getItem("token"));
+                    await fetchFoodList(localStorage.getItem("token"));
+                    await fetchProductPrice(localStorage.getItem("token"))
+                    await fetchProductPurchaseQuantity(localStorage.getItem("token"))
+                    await fetchProductFromPriceHistory(localStorage.getItem("token"))
+                    await fetchTodayRevenue(localStorage.getItem("token"))
+                    await fetchTotalRevenue(localStorage.getItem("token"))
+                }
+
             }
         }
         loadData();
@@ -270,7 +263,10 @@ const StoreContextProvider = (props) => {
         setMenu,
         token,
         setToken,
-
+        
+        isAdmin,
+        setIsAdmin,
+        
         foodList,
         fetchFoodList,
         onlineOrdersData,

@@ -3,7 +3,7 @@ import './MenuManagement.css'
 import axios from 'axios'
 import { BACKEND_URL } from '../../../config/constants.js' // This import is no longer needed for image URLs
 import { toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import EditPopup from '../../components/EditPopup/EditPopup.jsx'
 import ConfirmPopup from '../../components/ConfirmPopup/ConfirmPopup.jsx'
 import { StoreContext } from '../../context/StoreContext.jsx'
@@ -11,7 +11,7 @@ import { StoreContext } from '../../context/StoreContext.jsx'
 
 
 const MenuManagement = () => {
-    const { foodList, fetchFoodList, token } = useContext(StoreContext);
+    const { foodList, fetchFoodList, token, isAdmin } = useContext(StoreContext);
     const [showEditPopup, setShowEditPopup] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
 
@@ -19,6 +19,8 @@ const MenuManagement = () => {
 
     // State to track the specific product being edited and its new image file
     const [editingImage, setEditingImage] = useState({ productId: null, file: null });
+
+    const navigate = useNavigate();
 
     const mapCategoryIdToName = (id) => {
         switch (id) {
@@ -109,6 +111,12 @@ const MenuManagement = () => {
             }
         }
     }
+
+    useEffect(() => {
+        if (!isAdmin) {
+            navigate('/onlineOrdersManagement')
+        }
+    }, [isAdmin])
 
     return (
         <div className='menu-list'>

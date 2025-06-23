@@ -8,7 +8,7 @@ import { StoreContext } from '../../context/StoreContext'
 
 
 const AddStaff = () => {
-    const { token } = useContext(StoreContext);
+    const { token, isAdmin } = useContext(StoreContext);
 
     const navigate = useNavigate();
 
@@ -69,9 +69,11 @@ const AddStaff = () => {
 
     }
 
-    // useEffect(() => {
-    //     console.log(data)
-    // }, [data])
+    useEffect(() => {
+        if (!isAdmin) {
+            navigate('/onlineOrdersManagement')
+        }
+    }, [isAdmin])
 
     return (
         <div className='signup-container'>

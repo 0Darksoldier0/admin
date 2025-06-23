@@ -1,22 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './StaffManagement.css'
 import ConfirmPopup from '../../components/ConfirmPopup/ConfirmPopup'
 import StaffEditPopup from '../../components/StaffEditPopup/StaffEditPopup'
 import axios from 'axios'
 import { BACKEND_URL } from '../../../config/constants'
 import { toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext'
 import { useContext } from 'react'
 import { useState } from 'react'
 
 const StaffManagement = () => {
 
-    const { staffList, fetchUsers, token } = useContext(StoreContext)
+    const { staffList, fetchUsers, token, isAdmin } = useContext(StoreContext)
     const [showStaffEditPopup, setStaffShowEditPopup] = useState(false);
     const [currentStaff, setCurrentStaff] = useState(null);
 
     const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+
+    const navigate = useNavigate();
 
     const removeStaff = async (username) => {
         try {
@@ -60,6 +62,12 @@ const StaffManagement = () => {
     const onUpdateSuccessHandler = async () => {
         await fetchUsers(token);
     };
+
+    useEffect(() => {
+        if (!isAdmin) {
+            navigate('/onlineOrdersManagement')
+        }
+    }, [isAdmin])
 
     return (
         <div className='staff-list'>
