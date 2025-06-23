@@ -6,12 +6,13 @@ import { toast } from 'react-toastify'
 import { BACKEND_URL, MIN_PRICE } from '../../../config/constants.js'
 import { useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext.jsx'
+import { jwtDecode } from 'jwt-decode'
 
 const AddProduct = () => {
 
     const navigate = useNavigate();
 
-    const { isAdmin, token, fetchFoodList, fetchProductPrice} = useContext(StoreContext);
+    const { token, fetchFoodList, fetchProductPrice} = useContext(StoreContext);
 
     const [image, setImage] = useState(false);
     const [isAvailable, setIsAvailable] = useState(true);
@@ -86,10 +87,12 @@ const AddProduct = () => {
     }
 
     useEffect(() => {
-        if (!isAdmin) {
+        const decoded = jwtDecode(localStorage.getItem("token"));
+
+        if (decoded.type !== 0) {
             navigate('/onlineOrdersManagement')
         }
-    }, [isAdmin])
+    }, [])
 
     return (
         <div className='add-product-container'>

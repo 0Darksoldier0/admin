@@ -5,10 +5,10 @@ import { BACKEND_URL } from '../../../config/constants'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { StoreContext } from '../../context/StoreContext'
-
+import { jwtDecode } from 'jwt-decode'
 
 const AddStaff = () => {
-    const { token, isAdmin } = useContext(StoreContext);
+    const { token } = useContext(StoreContext);
 
     const navigate = useNavigate();
 
@@ -70,10 +70,12 @@ const AddStaff = () => {
     }
 
     useEffect(() => {
-        if (!isAdmin) {
+        const decoded = jwtDecode(localStorage.getItem("token"));
+
+        if (decoded.type !== 0) {
             navigate('/onlineOrdersManagement')
         }
-    }, [isAdmin])
+    }, [])
 
     return (
         <div className='signup-container'>

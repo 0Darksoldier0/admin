@@ -7,6 +7,7 @@ import { StoreContext } from '../../context/StoreContext'
 import { BACKEND_URL } from '../../../config/constants';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 ChartJS.register(
     CategoryScale,
@@ -22,7 +23,7 @@ ChartJS.register(
 const Dashboard = () => {
 
     const { priceData, productPurchaseQuantityData, productHistoryData,
-        todayRevenueData, totalRevenueData, token, isAdmin } = useContext(StoreContext);
+        todayRevenueData, totalRevenueData, token } = useContext(StoreContext);
 
     const [productPriceHistoryData, setProductPriceHistoryData] = useState([]);
     const [selectedProductId, setSelectedProductId] = useState('');
@@ -340,10 +341,12 @@ const Dashboard = () => {
     };
 
     useEffect(() => {
-        if (!isAdmin) {
+        const decoded = jwtDecode(localStorage.getItem("token"));
+
+        if (decoded.type !== 0) {
             navigate('/onlineOrdersManagement')
         }
-    }, [isAdmin])
+    }, [])
 
     return (
         <div className='dashboard-container'>

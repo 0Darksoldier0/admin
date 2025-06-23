@@ -9,10 +9,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { StoreContext } from '../../context/StoreContext'
 import { useContext } from 'react'
 import { useState } from 'react'
+import { jwtDecode } from 'jwt-decode'
 
 const StaffManagement = () => {
 
-    const { staffList, fetchUsers, token, isAdmin } = useContext(StoreContext)
+    const { staffList, fetchUsers, token } = useContext(StoreContext)
     const [showStaffEditPopup, setStaffShowEditPopup] = useState(false);
     const [currentStaff, setCurrentStaff] = useState(null);
 
@@ -64,10 +65,12 @@ const StaffManagement = () => {
     };
 
     useEffect(() => {
-        if (!isAdmin) {
+        const decoded = jwtDecode(localStorage.getItem("token"));
+
+        if (decoded.type !== 0) {
             navigate('/onlineOrdersManagement')
         }
-    }, [isAdmin])
+    }, [])
 
     return (
         <div className='staff-list'>

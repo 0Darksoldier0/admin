@@ -7,11 +7,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import EditPopup from '../../components/EditPopup/EditPopup.jsx'
 import ConfirmPopup from '../../components/ConfirmPopup/ConfirmPopup.jsx'
 import { StoreContext } from '../../context/StoreContext.jsx'
-
+import { jwtDecode } from 'jwt-decode'
 
 
 const MenuManagement = () => {
-    const { foodList, fetchFoodList, token, isAdmin } = useContext(StoreContext);
+    const { foodList, fetchFoodList, token } = useContext(StoreContext);
     const [showEditPopup, setShowEditPopup] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
 
@@ -113,10 +113,12 @@ const MenuManagement = () => {
     }
 
     useEffect(() => {
-        if (!isAdmin) {
+        const decoded = jwtDecode(localStorage.getItem("token"));
+
+        if (decoded.type !== 0) {
             navigate('/onlineOrdersManagement')
         }
-    }, [isAdmin])
+    }, [])
 
     return (
         <div className='menu-list'>

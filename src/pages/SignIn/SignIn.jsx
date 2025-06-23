@@ -63,8 +63,8 @@ const SignIn = () => {
                     await fetchProductFromPriceHistory(response.data.token);
                     await fetchTodayRevenue(response.data.token);
                     await fetchTotalRevenue(response.data.token);
-                }
 
+                }
 
                 navigate('/');
             }
