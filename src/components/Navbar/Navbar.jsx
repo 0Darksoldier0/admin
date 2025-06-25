@@ -25,28 +25,28 @@ const Navbar = () => {
             </div></Link>
             {
                 token
-                    ? isAdmin 
-                    ? <>
-                        <ul className='navbar-menu'>
+                    ? isAdmin
+                        ? <>
+                            <ul className='navbar-menu'>
 
-                            <Link to='/' className={menu === "Dashboard" ? "active" : "inactive"}>Dashboard</Link>
-                            <Link to='/menuManagement' className={menu === "Manage Menu" ? "active" : "inactive"}>Menu</Link>
+                                <Link to='/' className={menu === "Dashboard" ? "active" : "inactive"}>Dashboard</Link>
+                                <Link to='/menuManagement' className={menu === "Manage Menu" ? "active" : "inactive"}>Menu</Link>
+                                <Link to='/onlineOrdersManagement' className={menu === "Manage Online Orders" ? "active" : "inactive"}>Online Orders</Link>
+                                <Link to='/ordersManagement' className={menu === "Manage Orders" ? "active" : "inactive"}>In-house Orders</Link>
+                                <Link to='/staffManagement' className={menu === "Manage Staff" ? "active" : "inactive"}>Staff</Link>
+                            </ul>
+                            <div className="navbar-right">
+                                <button onClick={onSignOutClickHandler}>Sign Out</button>
+                            </div>
+                        </>
+                        : <><ul className='navbar-menu'>
+
                             <Link to='/onlineOrdersManagement' className={menu === "Manage Online Orders" ? "active" : "inactive"}>Online Orders</Link>
                             <Link to='/ordersManagement' className={menu === "Manage Orders" ? "active" : "inactive"}>In-house Orders</Link>
-                            <Link to='/staffManagement' className={menu === "Manage Staff" ? "active" : "inactive"}>Staff</Link>
                         </ul>
-                        <div className="navbar-right">
-                            <button onClick={onSignOutClickHandler}>Sign Out</button>
-                        </div>
-                    </>
-                    : <><ul className='navbar-menu'>
-
-                            <Link to='/onlineOrdersManagement' className={menu === "Manage Online Orders" ? "active" : "inactive"}>Online Orders</Link>
-                            <Link to='/ordersManagement' className={menu === "Manage Orders" ? "active" : "inactive"}>In-house Orders</Link>
-                        </ul>
-                        <div className="navbar-right">
-                            <button onClick={onSignOutClickHandler}>Sign Out</button>
-                        </div></>
+                            <div className="navbar-right">
+                                <button onClick={onSignOutClickHandler}>Sign Out</button>
+                            </div></>
                     : <></>
             }
 
