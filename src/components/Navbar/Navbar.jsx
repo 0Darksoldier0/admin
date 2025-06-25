@@ -24,7 +24,8 @@ const Navbar = () => {
                 <p>A Hundred Tastes</p>
             </div></Link>
             {
-                token && isAdmin
+                token
+                    ? isAdmin 
                     ? <>
                         <ul className='navbar-menu'>
 
@@ -38,16 +39,15 @@ const Navbar = () => {
                             <button onClick={onSignOutClickHandler}>Sign Out</button>
                         </div>
                     </>
-                    : <>
-                        <ul className='navbar-menu'>
+                    : <><ul className='navbar-menu'>
 
                             <Link to='/onlineOrdersManagement' className={menu === "Manage Online Orders" ? "active" : "inactive"}>Online Orders</Link>
                             <Link to='/ordersManagement' className={menu === "Manage Orders" ? "active" : "inactive"}>In-house Orders</Link>
                         </ul>
                         <div className="navbar-right">
                             <button onClick={onSignOutClickHandler}>Sign Out</button>
-                        </div>
-                    </>
+                        </div></>
+                    : <></>
             }
 
         </div >
