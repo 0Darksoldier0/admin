@@ -21,10 +21,14 @@ const EditPopup = ({ product, onClose, onUpdateSuccess }) => {
     const [isAvailable, setIsAvailable] = useState(product.availability ? true : false)
 
     const categories = [
-        { category_id: 10, category_name: 'Appertizer' },
-        { category_id: 11, category_name: 'Main Dishes' },
-        { category_id: 12, category_name: 'Drinks' },
-        { category_id: 13, category_name: 'Desserts' },
+        { category_id: 10, category_name: 'South Korean' },
+        { category_id: 11, category_name: 'Japanese' },
+        { category_id: 12, category_name: 'Chinese' },
+        { category_id: 13, category_name: 'Italian' },
+        { category_id: 14, category_name: 'Vietnamese' },
+        { category_id: 15, category_name: 'Drink' },
+        { category_id: 16, category_name: 'Snack' },
+        { category_id: 17, category_name: 'The Usual' }
     ];
 
     const onChangeHandler = (event) => {

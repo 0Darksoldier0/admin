@@ -114,10 +114,14 @@ const AddProduct = () => {
                         <div className="add-category">
                             <p>Product Category</p>
                             <select onChange={onChangeHandler} name="category_id">
-                                <option value="10">Appetizers</option>
-                                <option value="11">Main Dishes</option>
-                                <option value="12">Drinks</option>
-                                <option value="13">Desserts</option>
+                                <option value="10">South Korean</option>
+                                <option value="11">Japanese</option>
+                                <option value="12">Chinese</option>
+                                <option value="13">Italian</option>
+                                <option value="14">Vietnamese</option>
+                                <option value="15">Drink</option>
+                                <option value="16">Snack</option>
+                                <option value="17">The Usual</option>
                             </select>
                         </div>
                         <div className="add-price right-section">
