@@ -65,7 +65,7 @@ const AddProduct = () => {
                         product_name: "",
                         price: "",
                         description: "",
-                        category_id: "10",
+                        category_id: Number(data.category_id),
                         availability: 1
                     });
                     setImage(false);
